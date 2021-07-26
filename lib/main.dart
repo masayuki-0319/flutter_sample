@@ -1,5 +1,3 @@
-/* 3-4. スライダー */
-
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -8,51 +6,48 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "My Simple App",
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Live!人工知能"),
-        ),
-        body: Center(
-          child: MyForm(),
-        ),
-      ),
+      home: MainPage(),
     );
   }
 }
 
-class MyForm extends StatefulWidget {
+class MainPage extends StatefulWidget {
   @override
-  _MyFormState createState() => _MyFormState();
+  _MainPageState createState() => _MainPageState();
 }
 
-class _MyFormState extends State<MyForm> {
-  double _value = 0.0;
-
-  void _changeSlider(double e) {
-    setState(() {  // 状態を保持する変数を変更する処理は、setState内に記述する
-      _value = e;
-    });
-  }
+class _MainPageState extends State<MainPage> {
 
   Widget build(BuildContext context) {
-    return Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Live!人工知能"),
+      ),
+      drawer: Drawer( // Drawerの配置
+        child: ListView(
           children: <Widget>[
-            Center(child:Text("値：$_value")),
-            Slider(  // スライダー
-              label: '$_value',
-              min: 0,
-              max: 100,
-              value: _value,
-              activeColor: Colors.orange,
-              inactiveColor: Colors.blueAccent,
-              divisions: 5,
-              onChanged: _changeSlider,
-            )
+            DrawerHeader(
+              child: Text("ヘッダーです。"),
+              duration: Duration(milliseconds: 5000),
+              decoration: BoxDecoration(  // Boxによる装飾
+                color: Colors.blue,
+              ),
+            ),
+            ListTile(
+              title: Text("アイテムその1"),
+              trailing: Icon(Icons.arrow_forward),
+            ),
+            ListTile(
+              title: Text("アイテムその2"),
+              trailing: Icon(Icons.arrow_forward),
+            ),
+            ListTile(
+              title: Text("アイテムその3"),
+              trailing: Icon(Icons.arrow_forward),
+            ),
           ],
-        )
+        ),
+      ),
     );
   }
 }
